@@ -1,8 +1,12 @@
+from urllib.parse import urljoin
+
 import scrapy
+from scrapy.utils.python import to_unicode
 from scrapy.shell import inspect_response
 
 class MySpider(scrapy.Spider):
     name = 'certcentral'
+    base_url = 'https://localhost.digicert.com'
     allowed_domains = ['localhost.digicert.com']     # Restrict to the following domain only
     handle_httpstatus_list = [301, 302, 500]
     urls = set()
@@ -14,23 +18,17 @@ class MySpider(scrapy.Spider):
 
     ''' pass login paramters here ''' 
     def login(self, response):
-        yield scrapy.http.FormRequest.from_response(response, formdata={'username': 'cc.admin', 'password': 'nothing'}, formid='login-form', callback=self.redirect_one)
+        yield scrapy.http.FormRequest.from_response(response, formdata={'username': 'cc.admin', 'password': 'nothing'}, formid='login-form', callback=self.redirect)
 
     ''' redirect after login '''
-    def redirect_one(self, response):
-        yield scrapy.http.Request('https://localhost.digicert.com/account/', 
-        callback=self.redirect_two)
-    
-    ''' 2nd redirect after login '''
-    def redirect_two(self, response):
-        yield scrapy.http.Request('https://localhost.digicert.com/account/index-entry.php', 
-        callback=self.get_home)
-
-    ''' go to /secure page '''
-    def get_home(self, response):
-        yield scrapy.http.Request('https://localhost.digicert.com/secure/', 
-        callback=self.parse)
-
+    def redirect(self, response):
+        print(response.status)
+        if response.status in [301, 302]:
+            if 'secure' in to_unicode(response.headers['Location']):
+                yield scrapy.http.Request('https://localhost.digicert.com/secure/', callback=self.parse)
+            else:
+                yield scrapy.http.Request(urljoin(response.request.url, to_unicode(response.headers['Location'])), callback=self.redirect)
+            
     ''' process urls from the response '''
     def yield_urls_from_response(self, response):
         for href in response.xpath('//a[starts-with(@href, "/secure")]/@href').getall():

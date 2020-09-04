@@ -101,7 +101,7 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Redirect stuff - deb added
-REDIRECT_MAX_TIMES = 4
+REDIRECT_MAX_TIMES = 5
 
 #depth limit - deb added
 #DEPTH_LIMIT = 8
