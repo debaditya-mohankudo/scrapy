@@ -28,9 +28,9 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -47,7 +47,11 @@ COOKIES_SQLITE_DATABASE = ':memory:'
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
 #}
-DEFAULT_REQUEST_HEADERS = {'Accept-Language': ['en'], 'Accept-Encoding': ['gzip,deflate'], 'Accept': ['text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'], 'User-Agent': ['Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36']}
+DEFAULT_REQUEST_HEADERS = {
+    'Accept-Language': ['en'], 
+    'Accept-Encoding': ['gzip,deflate'], 
+    'Accept': ['text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'], 
+    'User-Agent': ['Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36']}
 
 
 # Enable or disable spider middlewares
@@ -86,7 +90,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
-DOWNLOAD_DELAY=2 # delay between consecutive requests
+
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -100,4 +104,4 @@ DOWNLOAD_DELAY=2 # delay between consecutive requests
 REDIRECT_MAX_TIMES = 3
 
 #depth limit - deb added
-DEPTH_LIMIT = 2
+DEPTH_LIMIT = 3
