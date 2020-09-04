@@ -24,8 +24,8 @@ class MySpider(scrapy.Spider):
     def redirect(self, response):
         print(response.status)
         if response.status in [301, 302]:
-            if 'secure' in to_unicode(response.headers['Location']):
-                yield scrapy.http.Request('https://localhost.digicert.com/secure/', callback=self.parse)
+            if '/secure' in to_unicode(response.headers['Location']):
+                yield scrapy.http.Request(urljoin(response.request.url, to_unicode(response.headers['Location'])), callback=self.parse)
             else:
                 yield scrapy.http.Request(urljoin(response.request.url, to_unicode(response.headers['Location'])), callback=self.redirect)
             
