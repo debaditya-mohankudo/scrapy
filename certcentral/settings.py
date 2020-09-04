@@ -30,7 +30,7 @@ ROBOTSTXT_OBEY = False
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 1 #16
+#CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -101,7 +101,7 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Redirect stuff - deb added
-REDIRECT_MAX_TIMES = 3
+REDIRECT_MAX_TIMES = 4
 
 #depth limit - deb added
-DEPTH_LIMIT = 5
+#DEPTH_LIMIT = 8
