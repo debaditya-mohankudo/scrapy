@@ -6,8 +6,8 @@ from scrapy.shell import inspect_response
 
 class MySpider(scrapy.Spider):
     name = 'certcentral'
-    base_url = 'https://localhost.digicert.com'
-    allowed_domains = ['localhost.digicert.com']     # Restrict to the following domain only
+    base_url = 'https://localhost.xxxxxx.com'
+    allowed_domains = ['localhost.xxxxxx.com']     # Restrict to the following domain only
     handle_httpstatus_list = [301, 302, 500]
     
     def __init__(self):
@@ -17,7 +17,7 @@ class MySpider(scrapy.Spider):
     '''starts here Yay '''
     def start_requests(self):
         # https://stackoverflow.com/questions/39776377/cant-get-scrapy-to-parse-and-follow-301-302-redirects
-        yield scrapy.http.FormRequest('https://localhost.digicert.com/account/login.php', callback=self.login)
+        yield scrapy.http.FormRequest('https://localhost.xxxxxxx.com/account/login.php', callback=self.login)
 
     ''' pass login paramters here ''' 
     def login(self, response):
